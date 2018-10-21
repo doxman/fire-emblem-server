@@ -1,1 +1,1 @@
-from .index import fetch_map
+from .index import fetch_map, map_options

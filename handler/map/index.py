@@ -5,7 +5,8 @@ def fetch_map(handler):
         
         if message is not None:
             handler.send_response(200)
-            handler.send_header('Content-type', 'image/png')    
+            handler.send_header('Content-type', 'image/png')  
+            handler.send_header('Access-Control-Allow-Origin', 'http://localhost:3000')  
             handler.end_headers()
 
             handler.wfile.write(message)
@@ -13,3 +14,12 @@ def fetch_map(handler):
 
     except IOError:
         handler.send_error(404, 'Could not find map file')
+
+def map_options(handler):
+    handler.send_response(204)
+    handler.send_header('Access-Control-Allow-Credentials', 'true')
+    handler.send_header('Access-Control-Allow-Origin', 'http://localhost:3000')
+    handler.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+    handler.send_header("Access-Control-Allow-Headers", "X-Requested-With, Content-type")
+    handler.end_headers()
+
